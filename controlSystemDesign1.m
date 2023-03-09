@@ -11,17 +11,17 @@ sys1=tf([1 1],conv(conv([1 2],[1 3]),[1 4]));
 figure
 bode(sys1)
 grid on
-[Gm,Pm,wcp,wcg] = margin(sys1); 
+[Gm,Pm,wpc,wgc] = margin(sys1); 
 GmdB = 20*log10(Gm); 
 b=b+1;
-metrics1(:,b)=[GmdB,Pm,wcp,wcg];
+metrics1(:,b)=[GmdB,Pm,wpc,wgc];
 disp(metrics1)
 % The uncompensated system above has infinite gain and phase margin.We are
 % required to get a Gain Margin of 50dB.
 
 figure
 p=0;
-for K=-0.08:0.001:-0.05
+for K=-0.08:0.001:-0.0750
     num=[1 1]*K;
     den=conv(conv([1 2],[1 3]),[1 4]);
     sys=tf(num,den);
@@ -43,9 +43,11 @@ disp(metrics)
 
 %PART b)
 
+
 sys=tf([1 1],[1 9 26 24]);
 figure
 nyquist(sys)
+
 figure
 bode(sys)
 grid on
